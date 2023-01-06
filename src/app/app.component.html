@@ -1,0 +1,29 @@
+<hello name="{{ name }}"></hello>
+<table [formGroup]='contactForm'>
+  <ng-container formArrayName='itemRows'>
+    <tr *ngFor="let itemRow of itemRows.controls; let i = index" [formGroupName]='i'>
+      <td>
+        <select class="form-control" formControlName="province_id"
+           (change)="onChangeProvince(i)">
+          <option  value=''>Select Province</option>
+          <option *ngFor="let province of provinces; let i = index" 
+              [value]="province.id">{{province.province_name}}
+              </option>
+       </select>
+      </td>
+      <td>
+        <select  class="form-control" formControlName="district_id">
+          <option value=''>Select District</option>
+          <option *ngFor="let district of districts[i]" [value]="district.id">
+               {{district.district_name}}</option>
+       </select>
+      </td>
+      <td>
+        <button class="btn btn-danger"  type="button"
+           (click)="deleteMyRelation(i)">Delete</button>
+        <button class="btn btn-primary" type="button"
+           (click)="addItem()">Add</button>
+      </td>
+    </tr>
+  </ng-container>
+</table>
